@@ -1,0 +1,17 @@
+<div>
+  <input [(ngModel)]="userInput" (change)="handleSearchInputChange(userInput)">
+  <br>
+  <div class="row">
+    <div *ngFor="let film of films" class="col">
+      <div class="card">
+        <br>
+        <p>{{film.title}}</p>
+        <img src="{{film.poster}}" width="100">
+        <p> {{film.year}}</p>
+        <p> {{film.type}}</p>
+        <button (click)="showContent()">Details <a class="nav-link" [routerLink]="['/film-details']"
+            routerLinkActive="active">Film-details</a></button>
+      </div>
+    </div>
+  </div>
+</div>

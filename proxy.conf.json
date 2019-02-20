@@ -1,0 +1,6 @@
+{
+    "/omdb/api": {
+      "target": "http://www.omdbapi.com/?apikey=e36ea2a2&",
+      "secure": false
+    }
+  }

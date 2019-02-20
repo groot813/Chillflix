@@ -1,17 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FilmsService } from './films.service';
-//Hier wordt de gecreeerde films service geimporteerd in de controller.
-import { Film } from './models/film';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { delay, tap, switchMap } from 'rxjs/operators';
-
+import { Film } from 'src/app/models/film';
+import { FilmsService } from 'src/app/films.service';
+import { tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-film-search',
+  templateUrl: './film-search.component.html',
+  styleUrls: ['./film-search.component.scss']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class FilmSearchComponent {
+
 
   public films: Film[] = [];
   public date = new Date();
@@ -44,16 +43,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscriptions.add(searchSubscrition);
   }
 
-  public ngOnDestroy(): void {
-    throw new Error("Method not implemented.");
-    console.log('Init');
-  }
-
-  public ngOnInit(): void {
-    this.subscriptions.add(this.filmsService.allFilms().subscribe(
-      filmsResponse => this.films = filmsResponse,
-      error => console.error('fout in Appcomponent bij ophalen films')));
-      }
+  // public ngOnInit(): void {
+  //   this.subscriptions.add(this.filmsService.allFilms().subscribe(
+  //     (      filmsResponse: any[]) => this.films = filmsResponse,
+  //     error => console.error('fout in Appcomponent bij ophalen films')));
+  //     }
 
   showContent() {
     this.toggle();
@@ -62,5 +56,6 @@ export class AppComponent implements OnInit, OnDestroy {
   private toggle() {
     this.condition = !this.condition;
   }
+
 
 }
