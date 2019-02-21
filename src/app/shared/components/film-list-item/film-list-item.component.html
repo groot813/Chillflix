@@ -1,0 +1,15 @@
+<div class="card-group">
+  <div class="card shadowTest" >
+    <div class="card-body">
+      <h5 class="card-title cardTitle ">{{ film?.title }}</h5>
+      <img src="{{ film.poster }}" />
+      <p>{{ film?.year }}</p>
+      <p>{{ film?.type }}</p>
+    </div>
+
+  </div>
+</div>
+<div>
+  <button class="btn btn-primary btn-sm m-3" [routerLink]="'/film-details/' + film?.imdbId">Zoek Details</button>
+  <button class="btn btn-primary btn-sm m-3" (click)="filmSelected(film)">Film Bestellen</button>
+</div>

@@ -1,15 +1,12 @@
-<div>
-  <input [(ngModel)]="userInput" (change)="handleSearchInputChange(userInput)">
-  <br>
-  <div class="row">
-    <div *ngFor="let film of films" class="col" [routerLink]="['/film-details/', film.imdbId]"> 
-      <div class="card">
-        <br>
-        <p>{{film.title}}</p>
-        <img src="{{film.poster}}" width="100">
-        <p> {{film.year}}</p>
-        <p> {{film.type}}</p>
-      </div>
-    </div>
-  </div>
+<input [(ngModel)]="userInput" (change)="handleSearchInputChange(userInput)" />
+
+<div class="d-flex justify-content-arround">
+  <br />
+  <br />
+  <app-film-list-item
+    *ngFor="let film of films"
+    [film]="film"
+    (orderFilm)="onFilmSelected(film)"
+  ></app-film-list-item>
 </div>
+

@@ -17,6 +17,7 @@ export class FilmSearchComponent {
   public price = 88
   public condition =false;
   public title:string="Marc";
+  public userInput: string ="";
   public tafels = [
     { tafelNummer: '1', aantalPersonen: '5' },
     { tafelNummer: '2', aantalPersonen: '5' },
@@ -43,12 +44,6 @@ export class FilmSearchComponent {
     this.subscriptions.add(searchSubscription);
   }
 
-  // public ngOnInit(): void {
-  //   this.subscriptions.add(this.filmsService.allFilms().subscribe(
-  //     (      filmsResponse: any[]) => this.films = filmsResponse,
-  //     error => console.error('fout in Appcomponent bij ophalen films')));
-  //     }
-
   showContent() {
     this.toggle();
     console.log("Marc");
@@ -56,6 +51,8 @@ export class FilmSearchComponent {
   private toggle() {
     this.condition = !this.condition;
   }
-
+  onFilmSelected(movie: Film) {
+   console.log(movie);
+ }
 
 }
