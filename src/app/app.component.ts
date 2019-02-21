@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FilmsService } from './films.service';
+import { FilmsService } from './service/films.service';
 //Hier wordt de gecreeerde films service geimporteerd in de controller.
 import { Film } from './models/film';
 import { Subscription } from 'rxjs';

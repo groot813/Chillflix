@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Film } from 'src/app/models/film';
-import { FilmsService } from 'src/app/films.service';
+import { FilmsService } from 'src/app/service/films.service';
 import { tap } from 'rxjs/operators';
 
 @Component({
@@ -30,7 +30,7 @@ export class FilmSearchComponent {
   }
 
   public handleSearchInputChange(userInput: string): void {
-    const searchSubscrition = this.filmsService.searchFilms(userInput)
+    const searchSubscription = this.filmsService.searchFilms(userInput)
       .pipe(
         // delay(6),
         tap(
@@ -40,7 +40,7 @@ export class FilmSearchComponent {
       )
       .subscribe()
 
-    this.subscriptions.add(searchSubscrition);
+    this.subscriptions.add(searchSubscription);
   }
 
   // public ngOnInit(): void {

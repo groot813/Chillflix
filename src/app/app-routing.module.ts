@@ -7,7 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 
 
 const routes: Routes = [
- {path: 'film-details' ,component: FilmDetailsComponent},
+ {path: 'film-details/:imdbId' ,component: FilmDetailsComponent},
  {path: 'film-search' , component: FilmSearchComponent},
  {path: 'home', component: HomeComponent},
  {path: '*' , component: HomeComponent}

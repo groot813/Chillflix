@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { tap, take } from 'rxjs/operators';
-import { Film } from 'src/app/models/film';
 import { Subscription } from 'rxjs';
-import { FilmsService } from 'src/app/films.service';
 import { ActivatedRoute } from '@angular/router';
+import { take, tap } from 'rxjs/operators';
+import { FilmsService } from 'src/app/service/films.service';
+import { FilmDetail } from 'src/app/models/film-detail.model';
 
 @Component({
   selector: 'app-film-details',
@@ -12,38 +12,27 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class FilmDetailsComponent implements OnInit {
 
-   
-  private subscriptions: Subscription = new Subscription();
+  public film: FilmDetail | undefined = undefined;
 
-  constructor(private activatedRoute: ActivatedRoute)
-   {
+  constructor(private activatedRoute: ActivatedRoute, private filmsService: FilmsService) {
   }
   
-  // public filmDetail(imdbID: string): void {
-  //   this.filmsService.searchFilmDetail(imdbID)
-  //     .pipe(
-  //       // delay(6),
-  //       take(1),
-  //       tap(
-  //         filmsResponse => this.films = filmsResponse,
-  //         error => console.error('fout in Appcomponent bij ophalen films')
-  //       )
-  //     )
-  //     .subscribe()
-  // }
-
-   ngOnInit() {   
-     console.log(this.activatedRoute.snapshot.params)
-    }
-
-    //  this.subscriptions.add(this.filmsService.allFilms().subscribe(
-    //   (      filmsResponse: any[]) => this.films = filmsResponse,
-      // error => console.error('fout in Appcomponent bij ophalen films')));
-    
- 
-
-
-  // }
+  public filmDetail(imdbId: string): void {
+    this.filmsService.searchFilmDetail(imdbId)
+      .pipe(
+        // delay(6),
+        take(1),
+        tap(
+          filmsResponse => this.film = filmsResponse,
+          error => console.error('fout in Appcomponent bij ophalen films')
+        )
+      )
+      .subscribe()
   }
 
+  ngOnInit() {
+    console.log(this.activatedRoute.snapshot.params)
+    this.filmDetail(this.activatedRoute.snapshot.params.imdbId);
+  }
 
+}
