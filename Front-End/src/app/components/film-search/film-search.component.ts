@@ -13,18 +13,7 @@ export class FilmSearchComponent {
 
 
   public films: Film[] = [];
-  // public date = new Date();
-  // public price = 88
   public condition =false;
-  // public title:string="Marc";
-  // public userInput: string ="";
-  // public tafels = [
-  //   { tafelNummer: '1', aantalPersonen: '5' },
-  //   { tafelNummer: '2', aantalPersonen: '5' },
-  //   { tafelNummer: '3', aantalPersonen: '6' },
-  //   { tafelNummer: '4', aantalPersonen: '10' }
-  // ]
-
   private subscriptions: Subscription = new Subscription();
 
   constructor(private filmsService: FilmsService) {

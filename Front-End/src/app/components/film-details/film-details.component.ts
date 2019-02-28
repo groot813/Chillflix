@@ -16,7 +16,7 @@ export class FilmDetailsComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private filmsService: FilmsService) {
   }
-  
+
   public filmDetail(imdbId: string): void {
     this.filmsService.searchFilmDetail(imdbId)
       .pipe(
@@ -27,11 +27,11 @@ export class FilmDetailsComponent implements OnInit {
           error => console.error('fout in Appcomponent bij ophalen films')
         )
       )
-      .subscribe()
+      .subscribe();
   }
 
   ngOnInit() {
-    console.log(this.activatedRoute.snapshot.params)
+    // console.log(this.activatedRoute.snapshot.params)
     this.filmDetail(this.activatedRoute.snapshot.params.imdbId);
   }
 
