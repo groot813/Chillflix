@@ -10,15 +10,14 @@ export class MovieService {
 
   constructor(
     @InjectRepository(MovieEntity)
-    private readonly movieRepository: Repository<MovieEntity>,
-  ) {}
+  
+    private readonly movieRepository: Repository<MovieEntity>) {}
 
   getMovies(): Promise<Movie[]> {
     return this.movieRepository.find();
 // tslint:disable-next-line: max-line-length
     // const myMappedMovies = moviesEntities.map(movieEntity => new Movie(movieEntity.title, movieEntity.poster, movieEntity.title,movieEntity.,movieEntity.author));
     //   return this.movieRepository.find();
-
   }
 
   saveMovie(movie: Movie): void {
