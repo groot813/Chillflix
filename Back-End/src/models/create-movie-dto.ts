@@ -18,7 +18,7 @@ export class CreateMovieDto{
     @ApiModelProperty()
     public readonly title: string;
 
-    @IsString()
+    @IsNumber()
     @ApiModelProperty()
     public readonly year: number;
 
