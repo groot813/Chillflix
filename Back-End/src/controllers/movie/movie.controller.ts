@@ -3,7 +3,6 @@ import { CreateMovieDto } from 'src/models/create-movie-dto';
 import { Movie } from 'src/models/movie';
 import { MovieService } from 'src/service/movie/movie.service';
 import { appendFile } from 'fs';
-import { MovieEntity } from 'src/models/movie/movie.entity';
 
 @Controller('movie')
 export class MovieController {
