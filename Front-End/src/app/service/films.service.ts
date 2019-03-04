@@ -13,27 +13,6 @@ export class FilmsService {
 
     constructor(private http: HttpClient) {
     }
-
-    public allFilms(): Observable<Film[]> {
-        return this.http.get<IOMDBSearchResponse>("http://www.omdbapi.com/?apikey=e36ea2a2&s=seven")
-            .pipe(
-                map(FilmsService.IOMDBSearchResponseToFilmsMapper)
-            )
-    }
-    public searchFilms(searchString: String): Observable<Film[]> {
-        return this.http.get<IOMDBSearchResponse>("http://www.omdbapi.com/?apikey=e36ea2a2&s=" + searchString)
-            .pipe(
-                map(FilmsService.IOMDBSearchResponseToFilmsMapper)
-            )
-    }
-
-    public searchFilmDetail(imdbID: String): Observable<FilmDetail> {
-        return this.http.get<OMDBDetailResponse>("http://www.omdbapi.com/?apikey=e36ea2a2&i=" + imdbID)
-            .pipe(
-                map(data => FilmsService.OmdbFilmToMyFilm(data))
-                ///Map is een transformatie http.get is een methode van de Angular http service
-            )
-    }
 //Met static kan ik direct de methode aanroepen zonder een instantie te heoven aanmaken of dependency injection te hoeven gebruiken.
 
     private static IOMDBSearchResponseToFilmsMapper(omdbSearchResponse: IOMDBSearchResponse): Film[] {
@@ -72,14 +51,35 @@ export class FilmsService {
             OmdbDetailResponse.Response
         );
     }
+
+    public allFilms(): Observable<Film[]> {
+        return this.http.get<IOMDBSearchResponse>("http://www.omdbapi.com/?apikey=e36ea2a2&s=seven")
+            .pipe(
+                map(FilmsService.IOMDBSearchResponseToFilmsMapper)
+            )
+    }
+    public searchFilms(searchString: String): Observable<Film[]> {
+        return this.http.get<IOMDBSearchResponse>("http://www.omdbapi.com/?apikey=e36ea2a2&s=" + searchString)
+            .pipe(
+                map(FilmsService.IOMDBSearchResponseToFilmsMapper)
+            )
+    }
+
+    public searchFilmDetail(imdbID: String): Observable<FilmDetail> {
+        return this.http.get<OMDBDetailResponse>("http://www.omdbapi.com/?apikey=e36ea2a2&i=" + imdbID)
+            .pipe(
+                map(data => FilmsService.OmdbFilmToMyFilm(data))
+                ///Map is een transformatie http.get is een methode van de Angular http service
+            )
+    }
 }
-//Interface specificatie richting IOMDB service op internet
+// Interface specificatie richting IOMDB service op internet
 interface IOMDBSearchResponse {
     Search: OMDBFilm[];
     totalResults: string;
     Response: string;
 }
-//Interface specificatie richting IOMDB service
+// Interface specificatie richting IOMDB service
 interface OMDBFilm {
     Title: string;
     Year: string;
@@ -88,7 +88,7 @@ interface OMDBFilm {
     Poster: string;
 }
 
-//Interface voor film detail in een specificate richting de IOMDB service
+// Interface voor film detail in een specificate richting de IOMDB service
 interface searchFilmDetail {
     Title: string;
     Year: string;
@@ -124,9 +124,3 @@ interface OMDBDetailResponse {
     'Response': string;
 }
 
-
-
-
-class Car {
-    public static drive() {}
-}

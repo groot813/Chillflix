@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Film } from 'src/app/models/film';
 import { FilmsService } from 'src/app/service/films.service';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-film-search',
@@ -13,7 +13,7 @@ export class FilmSearchComponent {
 
 
   public films: Film[] = [];
-  public condition =false;
+  public condition = false;
   private subscriptions: Subscription = new Subscription();
 
   constructor(private filmsService: FilmsService) {
@@ -28,7 +28,7 @@ export class FilmSearchComponent {
           error => console.error('fout in Appcomponent bij ophalen films')
         )
       )
-      .subscribe()
+      .subscribe();
 
     this.subscriptions.add(searchSubscription);
   }
