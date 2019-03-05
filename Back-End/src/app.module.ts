@@ -5,8 +5,9 @@ import { AppService } from './app.service';
 import { MovieController } from './controllers/movie/movie.controller';
 import { MovieService } from './service/movie/movie.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MovieEntity } from './models/movie/movie.entity';
-import { UserController } from './features/users/controllers/user/user.controller';
+import { MovieEntity } from './models/movie/movie-entity';
+import { UserController } from './controllers/user/user.controller';
+import { UserEntity } from './features/users/entities/user-entity';
 
 @Module({
   imports: [
@@ -17,10 +18,10 @@ import { UserController } from './features/users/controllers/user/user.controlle
       username: 'postgres',
       password: 'root',
       database: 'chillflix',
-      entities: [__dirname + '/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/**/*-entity{.ts,.js}'],
       synchronize: true,
     }),
-  TypeOrmModule.forFeature([MovieEntity])
+  TypeOrmModule.forFeature([MovieEntity, UserEntity])
   ],
   controllers: [AppController, MovieController, UserController],
   providers: [AppService, MovieService],
