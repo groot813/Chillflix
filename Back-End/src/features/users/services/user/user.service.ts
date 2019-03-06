@@ -1,40 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserEntity } from '../../entities/user-entity';
+import { Repository, ObjectID } from 'typeorm';
+import { CreateUserDto } from '../../dtos/user-dto/create-user-dto';
+import { MovieEntity } from 'src/models/movie/movie-entity';
+import { promise } from 'selenium-webdriver';
 
 @Injectable()
 export class UserService {
-    constructor(
-        @InjectRepository(UserEntity)
-        private readonly userRepository: Repository<UserEntity>){}
-}  
-     
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly userRepository: Repository<UserEntity>,
+  ) {}
 
+  // saveUser(user: CreateUserDto): void{
+ //  this.userRespository.save(user); }
 
+    //
 
-// import { Injectable } from '@nestjs/common';
-// import { Movie } from 'src/models/movie';
-// import { CreateMovieDto } from 'src/models/create-movie-dto';
-// import { InjectRepository } from '@nestjs/typeorm';
-// import { MovieEntity } from 'src/models/movie/movie-entity';
-// import { Repository } from 'typeorm';
+  saveUser(userEntity: UserEntity): void {
+    this.userRepository.save(userEntity);
+  }
 
-// @Injectable()
-// export class MovieService {
+  getUser(): Promise<UserEntity[]> {
+    return this.userRepository.find();
+  }
 
-//   constructor(
-//     @InjectRepository(MovieEntity)
-  
-//     private readonly movieRepository: Repository<MovieEntity>) {}
-
-//   getMovies(): Promise<Movie[]> {
-//     return this.movieRepository.find();
-// // tslint:disable-next-line: max-line-length
-//     // const myMappedMovies = moviesEntities.map(movieEntity => new Movie(movieEntity.title, movieEntity.poster, movieEntity.title,movieEntity.,movieEntity.author));
-//     //   return this.movieRepository.find();
-//   }
-
-//   saveMovie(movie: Movie): void {
-//       this.movieRepository.save(movie);
-//   }
-// }
+  getUserById(UserId: number): Promise<UserEntity> {
+     return this.userRepository.findOne({where: {id: UserId}});
+      }
+}

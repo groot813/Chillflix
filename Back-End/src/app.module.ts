@@ -8,9 +8,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { MovieEntity } from './models/movie/movie-entity';
 import { UserController } from './controllers/user/user.controller';
 import { UserEntity } from './features/users/entities/user-entity';
+import { UsersModule } from './features/users/users.module';
 
 @Module({
   imports: [
+    UsersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
@@ -21,7 +23,7 @@ import { UserEntity } from './features/users/entities/user-entity';
       entities: [__dirname + '/**/*-entity{.ts,.js}'],
       synchronize: true,
     }),
-  TypeOrmModule.forFeature([MovieEntity, UserEntity])
+  TypeOrmModule.forFeature([MovieEntity])
   ],
   controllers: [AppController, MovieController, UserController],
   providers: [AppService, MovieService],
